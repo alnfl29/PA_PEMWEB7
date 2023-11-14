@@ -16,7 +16,7 @@ if (isset($_POST['tambah'])) {
 
     if(move_uploaded_file($temp_name, $path)) {
         $stmt = $koneksi->prepare("INSERT INTO produk (nama_produk, harga_produk, foto_produk, deskripsi_produk) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssiss", $nama_produk, $harga_produk, $path, $deskripsi_produk);
+        $stmt->bind_param("siss", $nama_produk, $harga_produk, $path, $deskripsi_produk);
 
         if ($stmt->execute()) {
             echo "<script>
@@ -194,7 +194,7 @@ while ($row = mysqli_fetch_assoc($hasil)) {
     <div class="logo">
         <img src="chocolate (4) (1).png" alt="Logo">
     </div>
-    <a href="../tampilan.php">Data Checkout</a>
+    <a href="tampilan.php">Data Checkout</a>
     <a href="../index.php?#menu">Lihat Menu</a>
 </div>
 <form action="" method="post" enctype="multipart/form-data">
