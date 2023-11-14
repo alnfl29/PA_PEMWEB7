@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2023 at 06:44 AM
+-- Generation Time: Nov 14, 2023 at 08:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -26,17 +26,38 @@ USE `tokocoklat`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `keranjang_user`
+--
+
+CREATE TABLE `keranjang_user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `id_barang` int(255) NOT NULL,
+  `barang` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `produk`
 --
 
 CREATE TABLE `produk` (
   `id_produk` int(11) NOT NULL,
   `nama_produk` text NOT NULL,
-  `metodepembayaran_produk` text NOT NULL,
-  `jumlah_produk` int(11) NOT NULL,
   `deskripsi_produk` text NOT NULL,
-  `foto_produk` varchar(100) NOT NULL
+  `foto_produk` varchar(100) NOT NULL,
+  `harga_produk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `deskripsi_produk`, `foto_produk`, `harga_produk`) VALUES
+(1, 'produk1', 'lorem', 'contoh1.png', 11),
+(2, 'produk2', 'lorem', 'contoh4.png', 30),
+(3, 'produk3', 'lorem', 'contoh3.png', 21);
 
 -- --------------------------------------------------------
 
@@ -67,6 +88,12 @@ INSERT INTO `users` (`id`, `role`, `username`, `password`) VALUES
 --
 
 --
+-- Indexes for table `keranjang_user`
+--
+ALTER TABLE `keranjang_user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
@@ -83,10 +110,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `keranjang_user`
+--
+ALTER TABLE `keranjang_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
