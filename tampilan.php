@@ -238,7 +238,6 @@ while ($row = mysqli_fetch_assoc($hasil)) {
             <tr>
                 <th>No</th>
                 <th>Nama Coklat</th>
-                <th>Metode Pembayaran</th>
                 <th>Jumlah</th>
                 <th>Bukti Transaksi</th>
                 <th>Status Barang</th>
@@ -251,7 +250,6 @@ while ($row = mysqli_fetch_assoc($hasil)) {
                 <tr>
                     <td><?=$prd["id_produk"]?></td>
                     <td><?=$prd["nama_produk"]?></td>
-                    <td><?=$prd["metodepembayaran_produk"]?></td>
                     <td><?=$prd["jumlah_produk"]?></td>
                     <td>
                         <img src="../foto_produk1/<?=$prd["foto_produk"]?>" width="200">
@@ -263,7 +261,7 @@ while ($row = mysqli_fetch_assoc($hasil)) {
                         <a href="ubah.php?id=<?= $prd["id_produk"]; ?>" class="edit-btn">ubah</a>
                         <?php 
                         if (isset($_SESSION['akses']) && $_SESSION['akses'] === 'admin') {
-                            echo '<a href="admin.php?id=' . $prd["id_produk"] . '" class="status-btn">Change Status</a>';
+                            echo '<a href="../admin.php?id=' . $prd["id_produk"] . '" class="status-btn">Change Status</a>';
                         }
                         ?>
                     </td>
