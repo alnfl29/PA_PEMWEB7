@@ -5,7 +5,7 @@ session_start();
 //     exit;
 // }
 
-require 'koneksi.php';
+require '../koneksi.php';
 $hasil = mysqli_query($koneksi, "SELECT * FROM produk");
 
 $produk = [];
@@ -210,16 +210,16 @@ while ($row = mysqli_fetch_assoc($hasil)) {
 
 <div class="sidebar">
     <div class="logo">
-        <img src="chocolate (4) (1).png" alt="Logo">
+        <img src="../chocolate (4) (1).png" alt="Logo">
     </div>
-    <a href="index.html?#menu">Lihat Menu</a>
+    <a href="../index.php?#menu">Lihat Menu</a>
     <a href="tambah.php">Tambah Menu</a>
 </div>
 
 <div class="main-content">
     
     <div class="search-container">
-        <form action="search.php" method="post" class="ser">
+        <form action="../search.php" method="post" class="ser">
             <input type="text" name="search_query" placeholder="Search...">
             <button type="submit">Search</button>
         </form>
@@ -230,7 +230,7 @@ while ($row = mysqli_fetch_assoc($hasil)) {
         ?>
     </div>
     </div>
-    <a href="logout.php" class="statt-btn">Logout</a>
+    <a href="../logout.php" class="statt-btn">Logout</a>
     <h2>Data Checkout</h2>
 
     <table border="2">
@@ -238,9 +238,8 @@ while ($row = mysqli_fetch_assoc($hasil)) {
             <tr>
                 <th>No</th>
                 <th>Nama Coklat</th>
-                <th>Jumlah</th>
-                <th>Bukti Transaksi</th>
-                <th>Status Barang</th>
+                <th>Harga</th>
+                <th>Foto Produk</th>
                 <th>Deskripsi</th>
                 <th>Aksi</th>
             </tr>
@@ -250,18 +249,17 @@ while ($row = mysqli_fetch_assoc($hasil)) {
                 <tr>
                     <td><?=$prd["id_produk"]?></td>
                     <td><?=$prd["nama_produk"]?></td>
-                    <td><?=$prd["jumlah_produk"]?></td>
+                    <td><?=$prd["harga_produk"]?></td>
                     <td>
-                        <img src="../foto_produk1/<?=$prd["foto_produk"]?>" width="200">
+                        <img src="../foto_produk/<?=$prd["foto_produk"]?>" width="200">
                     </td>
-                    <td><?=$prd["status_transaksi"]?></td>
                     <td><?=$prd["deskripsi_produk"]?></td>
                     <td>
                         <a href="hapus.php?id=<?= $prd["id_produk"]; ?>" class="delete-btn">hapus</a>
                         <a href="ubah.php?id=<?= $prd["id_produk"]; ?>" class="edit-btn">ubah</a>
                         <?php 
                         if (isset($_SESSION['akses']) && $_SESSION['akses'] === 'admin') {
-                            echo '<a href="../admin.php?id=' . $prd["id_produk"] . '" class="status-btn">Change Status</a>';
+                            echo '<a href="admin.php?id=' . $prd["id_produk"] . '" class="status-btn">Change Status</a>';
                         }
                         ?>
                     </td>
@@ -269,7 +267,7 @@ while ($row = mysqli_fetch_assoc($hasil)) {
             <?php endforeach; ?>
         </tbody>
     </table>
-    <a href="proses_pembelian.php?id=<?= $prd["id_produk"]; ?>" class="checkout-btn">Check Out</a>
+    <a href="../proses_pembelian.php?id=<?= $prd["id_produk"]; ?>" class="checkout-btn">Check Out</a>
 </div>
 
 </body>
