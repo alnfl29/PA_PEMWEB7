@@ -3,7 +3,6 @@ require 'koneksi.php';
 
 if (isset($_POST['tambah'])) {
     $nama_produk = $_POST["nama_produk"];
-    $metodepembayaran_produk = $_POST["metodepembayaran_produk"];
     $jumlah_produk = $_POST["jumlah_produk"];
     $deskripsi_produk = $_POST["deskripsi_produk"];
     $foto_produk_name = $_FILES["foto_produk"]["name"];
@@ -13,11 +12,11 @@ if (isset($_POST['tambah'])) {
     $current_date = date('Y-m-d');
 
     $new_file_name = $current_date . "-" . basename($foto_produk_name, "." . $file_ext) . "." . $file_ext;
-    $path = "../foto_produk1/" . $new_file_name;
+    $path = "../foto_produk/" . $new_file_name;
 
     if(move_uploaded_file($temp_name, $path)) {
-        $stmt = $koneksi->prepare("INSERT INTO produk (nama_produk, metodepembayaran_produk, jumlah_produk, foto_produk, deskripsi_produk) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssiss", $nama_produk, $metodepembayaran_produk, $jumlah_produk, $path, $deskripsi_produk);
+        $stmt = $koneksi->prepare("INSERT INTO produk (nama_produk, jumlah_produk, foto_produk, deskripsi_produk) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssiss", $nama_produk, $jumlah_produk, $path, $deskripsi_produk);
 
         if ($stmt->execute()) {
             echo "<script>
@@ -201,13 +200,6 @@ while ($row = mysqli_fetch_assoc($hasil)) {
 <form action="" method="post" enctype="multipart/form-data">
     <label for="nama_produk">Nama Coklat : </label>
     <input type="text" name="nama_produk">
-
-    <label for="metodepembayaran_produk">Pilih Metode Pembayaran : </label>
-    <select name="metodepembayaran_produk" >
-        <option value="Dana">Dana</option>
-        <option value="Gopay">Gopay</option>
-        <option value="MBanking">MBanking</option>
-    </select>
 
     <label for="jumlah_produk">Jumlah Coklat : </label>
     <input type="number" name="jumlah_produk">
