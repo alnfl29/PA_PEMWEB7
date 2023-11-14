@@ -1,9 +1,9 @@
 <?php
-require 'koneksi.php';
+require '../koneksi.php';
 
 if (isset($_POST['tambah'])) {
     $nama_produk = $_POST["nama_produk"];
-    $jumlah_produk = $_POST["jumlah_produk"];
+    $harga_produk = $_POST["harga_produk"];
     $deskripsi_produk = $_POST["deskripsi_produk"];
     $foto_produk_name = $_FILES["foto_produk"]["name"];
     $temp_name = $_FILES["foto_produk"]['tmp_name'];
@@ -15,8 +15,8 @@ if (isset($_POST['tambah'])) {
     $path = "../foto_produk/" . $new_file_name;
 
     if(move_uploaded_file($temp_name, $path)) {
-        $stmt = $koneksi->prepare("INSERT INTO produk (nama_produk, jumlah_produk, foto_produk, deskripsi_produk) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssiss", $nama_produk, $jumlah_produk, $path, $deskripsi_produk);
+        $stmt = $koneksi->prepare("INSERT INTO produk (nama_produk, harga_produk, foto_produk, deskripsi_produk) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssiss", $nama_produk, $harga_produk, $path, $deskripsi_produk);
 
         if ($stmt->execute()) {
             echo "<script>
@@ -194,20 +194,20 @@ while ($row = mysqli_fetch_assoc($hasil)) {
     <div class="logo">
         <img src="chocolate (4) (1).png" alt="Logo">
     </div>
-    <a href="tampilan.php">Data Checkout</a>
-    <a href="index.php?#menu">Lihat Menu</a>
+    <a href="../tampilan.php">Data Checkout</a>
+    <a href="../index.php?#menu">Lihat Menu</a>
 </div>
 <form action="" method="post" enctype="multipart/form-data">
     <label for="nama_produk">Nama Coklat : </label>
     <input type="text" name="nama_produk">
 
-    <label for="jumlah_produk">Jumlah Coklat : </label>
-    <input type="number" name="jumlah_produk">
+    <label for="harga_produk">Harga Coklat : </label>
+    <input type="number" name="harga_produk">
 
-    <label for="foto_produk">Bukti Transaksi : </label>
+    <label for="foto_produk">Foto Produk : </label>
     <input type="file" name="foto_produk">
 
-    <label for="deskripsi_produk">Deskripsi (Data Alamat) : </label>
+    <label for="deskripsi_produk">Deskripsi : </label>
     <textarea name="deskripsi_produk" rows="10"></textarea>
 
     <button type="submit" name="tambah">Tambah</button>
