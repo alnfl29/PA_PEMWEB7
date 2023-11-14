@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require 'koneksi.php';
+require '../koneksi.php';
 
 $id_produk = $_GET['id'] ?? null;
 $statusTransaksi = '';
