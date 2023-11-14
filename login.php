@@ -6,7 +6,6 @@ session_start();
 if (isset($_POST["login"])) {
   $username = strtolower($_POST["username"]);
   $pass = $_POST["password"];
-  $role = $_POST["role"];
 
   // Ubah result disini
   $result = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$username'");
@@ -15,18 +14,13 @@ if (isset($_POST["login"])) {
   if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_assoc($result);
 
-    if (password_verify($pass, $row['password']) &&
-    ($row['role'] == 'admin') &&
-    ($row['role'] == $role)) {
-
+    if (password_verify($pass, $row['password']) && ($row['role'] == 'admin')) {
       
       $_SESSION["akses"] = "admin";
       header("location: tampilan.php");
       exit;
       
-    } else if (password_verify($pass, $row['password']) &&
-      ($row['role'] == 'user') && 
-      ($row['role'] == $role)) {
+    } else if (password_verify($pass, $row['password']) && ($row['role'] == 'user')) {
 
       $_SESSION["username"] = $username;
       $_SESSION["akses"] = "user";
@@ -76,14 +70,6 @@ if (isset($_POST["login"])) {
         <div class="inputBox">
           <label for="">Password</label>
           <input type="password" name="password" placeholder="Password" required>
-        </div>
-        <div class="inputBox">
-          <label for="">Role</label>
-          <select name="role" class="roles" id="" required>
-            <option value="">Select Role</option>
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
-          </select>
         </div>
         <input type="submit" value="Login" name="login">
         <div class="links">
