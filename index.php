@@ -1,6 +1,6 @@
 <?php
-require 'koneksi.php';
 session_start();
+require 'koneksi.php';
 if (!isset($_SESSION["akses"])){
     $_SESSION["akses"] = "none";
 }
@@ -73,33 +73,18 @@ if (!isset($_SESSION["akses"])){
             <h2>Sweetness and great price</h2>
         </div>
         <div class="menu-container">
+            <?php $fetch = $koneksi->query("SELECT * FROM PRODUK")?>
+            <?php while($prodrow = $fetch->fetch_assoc()){ ?>
             <div class="box">
                 <div class="box-img">
-                    <img id="chocolateImage" src="cadburry (1) (1).png" alt="">
+                    <img src="foto_produk/<?php echo $prodrow['foto_produk']; ?>" alt="">
                 </div>
-                <h2>Cadburry Dairy Milk</h2>
-                <h3>Sweet and milky taste</h3>
-                <span>$11.00</span>
-                <i class="fa-solid fa-cart-plus"></i>
+                <h2><?php echo $prodrow['nama_produk']; ?></h2>
+                <h3><?php echo $prodrow['deskripsi_produk']; ?></h3>
+                <span>$<?php echo $prodrow['harga_produk']; ?></span>
+                <a href="lempar.php?id=<?php echo $prodrow['id_produk']; ?>"><i class="fa-solid fa-cart-plus"></i></a>
             </div>
-            <div class="box">
-                <div class="box-img">
-                    <img src="kitkat (1).png" alt="">
-                </div>
-                <h2>KitKat</h2>
-                <h3>Sweet and wafery taste</h3>
-                <span>$11.00</span>
-                <i class="fa-solid fa-cart-plus"></i>
-            </div>
-            <div class="box">
-                <div class="box-img">
-                    <img src="silverqueen (1).png" alt="">
-                </div>
-                <h2>silverQueen</h2>
-                <h3>Sweet and nutty taste</h3>
-                <span>$11.00</span>
-                <i class="fa-solid fa-cart-plus"></i>
-            </div>
+            <?php } ?>
         </div>
     </section>
 
