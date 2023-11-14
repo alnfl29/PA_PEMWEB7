@@ -24,7 +24,7 @@ if (!isset($_SESSION["akses"])){
 
         <ul class="navbar">
             <body class="light-mode">
-            <li <?php if($_SESSION["akses"] === "user" || $_SESSION["akses"] === "none"){ echo 'style="display: none;"';}?>><a href="tambah.php">Tambah</a></li>
+            <li <?php if($_SESSION["akses"] === "user" || $_SESSION["akses"] === "none"){ echo 'style="display: none;"';}?>><a href="admin/tambah.php">Tambah</a></li>
         <?php
         if ($_SESSION["akses"] === "user" || $_SESSION["akses"] === "admin"){
         echo 
