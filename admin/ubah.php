@@ -40,8 +40,8 @@ if (isset($_POST['ubah'])) {
         $path = $produk['foto_produk'];
     }
 
-    $stmt = $koneksi->prepare("UPDATE produk SET nama_produk = ?, metodepembayaran_produk = ?, harga_produk = ?, foto_produk = ?, deskripsi_produk = ? WHERE id_produk = ?");
-    $stmt->bind_param("ssissi", $nama_produk, $metodepembayaran_produk, $harga_produk, $path, $deskripsi_produk, $id);
+    $stmt = $koneksi->prepare("UPDATE produk SET nama_produk = ?, deskripsi_produk = ?, foto_produk = ?, harga_produk = ? WHERE id_produk = ?");
+    $stmt->bind_param("sssii", $nama_produk, $deskripsi_produk, $path, $harga_produk, $id);
     
     if ($stmt->execute()) {
         echo "<script>
